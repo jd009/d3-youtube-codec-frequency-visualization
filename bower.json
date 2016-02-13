@@ -1,0 +1,11 @@
+{
+  "name": "d3_youtube_codec_frequency",
+  "description": "Visualization of codec frequency for youtube dataset",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "dependencies": {
+    "d3": "~3.5.15"
+  }
+}

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Youtube Video Codec Frequency Visualization</title>
+  </head>
+  <body>
+    <div class='graph'></div>
+    <script src='./bower_components/d3/d3.min.js'></script>
+    <script>
+      d3.tsv('youtube_videos.tsv', function(error, data){
+        if(error) throw error;
+        var codecHashTable = {};
+        data.forEach(function(d) {
+          var currentCodec = d.codec;
+          if(codecHashTable[currentCodec]) {
+            codecHashTable[currentCodec]++;
+          } else {
+            codecHashTable[currentCodec] = 1;
+          }
+        });
+
+        for(var codec in codecHashTable) {
+          console.log(codec + ': ', codecHashTable[codec]);
+        }
+      });
+    </script>
+  </body>
+</html>
