@@ -1,4 +1,5 @@
 function getCodecDataset() {
+  $('#codecDataSummary').append('<p>Loading...</p>');
   d3.tsv('youtube_videos.tsv', function(error, data){
     if(error) throw error;
     var codecDataSet = {};
@@ -16,8 +17,10 @@ function getCodecDataset() {
 }
 
 function logCodecDataSet(codecDataSet) {
+  $('#codecDataSummary').empty();
+  $('#codecDataSummary').append('<p>Codec: Frequency Count</p>');
   for(var codec in codecDataSet) {
-    console.log(codec + ': ', codecDataSet[codec]);
+    $('#codecDataSummary').append('<p>' + codec + ': ' + codecDataSet[codec] + '</p>');
   }
 };
 

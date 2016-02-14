@@ -6,6 +6,7 @@
   "license": "MIT",
   "homepage": "",
   "dependencies": {
-    "d3": "~3.5.15"
+    "d3": "~3.5.15",
+    "jQuery": "~2.2.0"
   }
 }
