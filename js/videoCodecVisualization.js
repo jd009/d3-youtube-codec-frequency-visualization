@@ -1,6 +1,11 @@
+/* Constants */
+var YOUTUBE_DATASET_TSV_FILE = 'youtube_videos.tsv';
+var INVALID_CODEC_NAME = 'none';
+
+/* Functions */
 function getCodecDataset() {
   $('#codecDataSummary').append('<p>Loading...</p>');
-  d3.tsv('youtube_videos.tsv', function(error, data){
+  d3.tsv(YOUTUBE_DATASET_TSV_FILE, function(error, data){
     if(error) throw error;
     var codecDataSet = {};
     data.forEach(function(d) {
@@ -39,7 +44,7 @@ function visualizeDataSet(codecInfoArray) {
       .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')' );
 
   var color = d3.scale.ordinal()
-    .range(["#98abc5", "#7b6888", "#a05d56", "#d0743c", "#ff8c00"]);
+    .range(['#98abc5', '#7b6888', '#a05d56', '#d0743c', '#ff8c00']);
 
   var arc = d3.svg.arc()
     .outerRadius(radius - 10)
@@ -68,16 +73,21 @@ function visualizeDataSet(codecInfoArray) {
 function convertToCodecInfoArray(codecDataSet) {
   var codecInfoArray = [];
   for(var codec in codecDataSet) {
-    var codecInfo = new CodecInfo(codec, codecDataSet[codec]);
-    codecInfoArray.push(codecInfo);
+    var isValidCodec = codec !== INVALID_CODEC_NAME;
+    if(isValidCodec) {
+      var codecInfo = new CodecInfo(codec, codecDataSet[codec]);
+      codecInfoArray.push(codecInfo);
+    }
   }
 
   return codecInfoArray;
 }
 
+/* Constructor Function */
 function CodecInfo(name, frequencyCount) {
   this.name = name;
   this.frequencyCount = frequencyCount;
 }
 
+/* Execution begins */
 getCodecDataset();
